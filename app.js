@@ -2,7 +2,7 @@ const express = require('express');
 const app=express();
 var morgan = require('morgan');
 const port= 8000;
-var datalayer=require('C:/Users/user/Documents/COURS_4A/applis/projet/datalayer');
+var datalayer=require('./datalayer');
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
