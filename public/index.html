@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="TodoApp">
+    <head>
+        <meta  charset="utf-8">
+        <title>DemoAPI</title>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular-cookies.js"></script>
+        <script src="main.js"></script>
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/8.5.0/build.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <link href="style.css" rel="stylesheet" media="all" type="text/css">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+    </head>
+    <body ng-controller="MainController" style="margin-bottom: 50px;" >
+        <div class="container">
+            <div class="header">
+                <div class="row">
+                    <div class="col-10">
+                        <h4 ng-model="user">Bienvenue {{user.user}} !</h4> 
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-deco" type="submit" ng-click="deconnexion()">Deconnexion</button>
+                    </div>
+                </div>
+            </div>
+            <h1>Vos listes</h1>
+            <div class="row" id="share" style="display:none;" ng-model="toggleS">
+                    <div class="col-10">
+                        <input class="input-sm form-control" placeholder="nom du collaborateur" ng-model="collab.text">
+                    </div>
+                    <div class="col-2">
+                        <button class="btn fas fa-share-alt btn-rd btn-green" style="margin-top:10%;" type="submit" ng-click="share()" onClick="$('#share').toggle();"></button>
+                    </div>
+                </div>
+                <div class="row" id="update"  style="display:none;" ng-model="toggleU">
+                    <div class="col-10">
+                        <input  placeholder="modifier le nom" class="input-sm form-control" ng-model="updateListe.text">
+                    </div>
+                    <div class="col-2">
+                        <button class="fas fa-pencil-alt right btn  btn-rd btn-blue" style="margin-top:10%;" type="submit" ng-click="updateList()" onClick="$('#update').toggle();"></button>
+                    </div>
+                </div>
+                <form class="add"> 
+                        <div class="row" id="updateTask" style="display:none;" ng-model="toggleUT">
+                            <div class="col-10" >
+                                <input  placeholder="modifier la tâche" class="input-sm form-control" ng-model="updateData.text">
+                            </div>
+                            <div class="col-2">
+                                <button class="btn btn-rd fas fa-pencil-alt btn-blue right" style="margin-top:10%;" type="submit" ng-click="updateToDo()" onClick="$('#updateTask').toggle();"></button>
+                            </div>
+                        </div>
+                    </form> 
+            <div class="card-columns">
+                    
+                <div class="card center-block box form group" ng-repeat="list in Liste">
+                    <div class="card-header">
+                        <button class="btn fas fa-trash-alt trash right" ng-click="deleteList(list._id)"></button> 
+                        <button class="btn share fas fa-share-alt" onClick="$('#share').toggle();" ng-click="shareToggle(list)"></button> 
+                        <button class="fas pencil fa-pencil-alt right btn" onClick="$('#update').toggle()" ng-click="updateToggle(list)"></button>
+
+                        <p class="center-block titre">{{list.name}}</p>
+
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled"  ng-model="listeData">
+                            <li class="item" ng-repeat="task in tache[$index]">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <input type="checkbox" id="check" class="left" id="done" ng-click="checkToDo(task._id,task.ok)" ng-checked="task.ok">                           
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="">{{task.name}} </p>
+                                    </div>
+                                    <div class="col-2">
+                                        <span class=" btn fas fa-trash-alt trash right" ng-click="deleteToDo(task._id)"></span>
+                                    </div>
+                                    <div class="col-2">
+                                        <button class="fas pencil fa-pencil-alt right btn" ng-click="updateTaskToggle(task)" onClick="$('#updateTask').toggle();"></button>
+                                    </div>
+                                </div>     
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <form>
+                            <div class="row">
+                                <div class="col-10">
+                                    <input class="form-control" placeholder="ajouter une tâche" ng-model="nameTask.text" type="text">
+                                </div>
+                                <div class="col-2">
+                                    <button class="btn btn fas fa-plus btn-rd btn-yellow right" type="submit" ng-click="createToDo(list._id)"></button>  
+                                </div>    
+                            </div>
+                        </form>
+                    </div> 
+                </div>
+            </div>
+            <h1>Les liste partagées avec vous</h1>
+            <form class="add"> 
+                    <div class="row" id="updateTaskP" style="display:none;" ng-model="toggleUT">
+                        <div class="col-10" >
+                            <input  placeholder="modifier la tâche" class="input-sm form-control" ng-model="updateData.text">
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-rd fas fa-pencil-alt btn-blue right" style="margin-top:10%;" type="submit" onClick="$('#updateTaskP').toggle();" ng-click="updateToDo()"></button>
+                        </div>
+                    </div>
+            </form>
+            <div class="card-columns">
+                <div class="card center-block box form group" ng-repeat="listP in ListeP">
+                    <div class="card-header">
+                        <p class="center-block titre">{{listP.name}}</p>     
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled"  ng-model="listeDataP">
+                            <li class="item" ng-repeat="taskP in tacheP[$index]">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <input type="checkbox" id="check" class="left" id="done" ng-click="checkToDo(taskP._id,taskP.ok)" ng-checked="taskP.ok">                           
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="name">{{taskP.name}} </p>
+                                    </div>
+                                    <div class="col-2">
+                                        <button class="fas pencil fa-pencil-alt right btn" onClick="$('#updateTaskP').toggle();" ng-click="updateTaskToggle(taskP)"></button>
+                                    </div>
+                                </div>
+                                      
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <form>
+                            <div class="row">
+                                <div class="col-10">
+                                    <input class="form-control" placeholder="ajouter" ng-model="nameTask.text" type="text">
+                                </div>
+                                <div class="col-2">
+                                    <button class="btn btn fas fa-plus btn-rd btn-yellow right" type="submit" ng-click="createToDo(listP._id)"></button>  
+                                </div>
+                            </div>
+                        </form>
+                    </div> 
+                </div>
+            </div>
+            <div class="footer">
+                <div class="row">
+                    <div class="col-10">
+                        <input class="form-control ajoutListe" placeholder="ajouter une liste" ng-model="nameList" type="text">
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-footer fas fa-plus btn-rd btn-yellow right" type="submit" ng-click="createList()"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

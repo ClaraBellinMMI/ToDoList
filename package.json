@@ -1,0 +1,25 @@
+{
+  "name": "projet",
+  "version": "1.0.0",
+  "description": "Projet Application Web et Mobiles",
+  "main": "app.js",
+  "dependencies": {
+    "bcrypt": "^3.0.5",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-utils": "^1.0.5",
+    "localstorage": "^1.0.1",
+    "mongodb": "^3.2.2"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "11.10.1",
+    "npm": "6.7.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Clara BELLIN",
+  "license": "ISC"
+}

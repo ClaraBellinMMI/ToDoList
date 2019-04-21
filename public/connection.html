@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="connection">
+    <head>
+        <meta  charset="utf-8">
+        <title>DemoAPI</title>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular-cookies.js"></script>
+        <script src="main.js"></script>
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/8.5.0/build.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <link href="style.css" rel="stylesheet" media="all" type="text/css">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+    </head>
+    <body ng-controller="ConnectionController">
+        <div class="container">
+            <div class="box co">
+                        <form>
+                                <h3>Connectez-vous</h3>
+                                <input class="form-control" placeholder="nom" ng-model="username">
+                                <input class="form-control" type="password" placeholder="mdp" ng-model="password">
+                                <button class="btn btn-rd btn-co btn-blue" type="submit" ng-click="auth()">connexion</button>
+                            </form>
+                
+                            <form>
+                                <h3>Ou inscrivez vous</h3>
+                                <input class="form-control" placeholder="nom" ng-model="usernameCreate">
+                                <input class="form-control" type="password" placeholder="mdp" ng-model="passwordCreate">
+                                <button type="submit" class="btn btn-co btn-rd btn-blue" ng-click="inscription()">inscription</button>
+                            </form>
+            </div>
+            
+        </div>
+    </body>
+</html>
