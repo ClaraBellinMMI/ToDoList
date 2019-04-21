@@ -1,7 +1,7 @@
 const express = require('express');
 const app=express();
 var morgan = require('morgan');
-const port= 8000;
+const PORT= process.env.port || 8000;
 var datalayer=require('./datalayer');
 
 var bodyParser = require('body-parser');
@@ -11,7 +11,7 @@ app.use(morgan('dev'));
 app.use(express.static('public'));
 datalayer.init(function(){
     console.log("init");
-    app.listen(port);
+    app.listen(PORT);
 });
 
 app.post('/login', function(req,res){
