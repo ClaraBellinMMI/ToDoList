@@ -1,7 +1,7 @@
 const express = require('express');
 const app=express();
 var morgan = require('morgan');
-const PORT= process.env.port || 8000;
+const PORT= process.env.PORT || 8000;
 var datalayer=require('./datalayer');
 
 var bodyParser = require('body-parser');
