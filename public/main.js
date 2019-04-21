@@ -1,4 +1,6 @@
 var demoApp = angular.module('TodoApp',['ngCookies']); //[cookies]
+var serv = "https://http://todolist-bellin.herokuapp.com/";
+
 demoApp.controller('MainController', function ($scope, $http, $cookies){ //,$cookies
     $scope.updateData = {};
     $scope.updateListe = {};
@@ -81,7 +83,7 @@ demoApp.controller('MainController', function ($scope, $http, $cookies){ //,$coo
             }
         });
     }else{
-        document.location.href="http://localhost:8000/connection.html";
+        document.location.href= serv + "/connection.html";
     }    
  
     $scope.createToDo = function(id){
@@ -206,7 +208,7 @@ demoApp.controller('MainController', function ($scope, $http, $cookies){ //,$coo
 
     $scope.deconnexion = function(){
         delete $cookies['user'];
-        document.location.href="http://localhost:8000/connection.html";
+        document.location.href= serv + "/connection.html";
     }
 
     $scope.shareToggle = function(list){
@@ -235,7 +237,7 @@ connectionApp.controller('ConnectionController', function ($scope, $http, $cooki
    $scope.password = "";
    $scope.username = "";
      if($cookies.user!=null){
-        document.location.href="http://localhost:8000";
+        document.location.href= serv;
      }
     $scope.auth = function(){
         if($scope.username && $scope.password){
@@ -248,7 +250,7 @@ connectionApp.controller('ConnectionController', function ($scope, $http, $cooki
                 if(resp.data.length>0){
                     $cookies.user=resp.data[0].username;
                     $cookies.id = resp.data[0]._id;
-                    document.location.href="http://localhost:8000";
+                    document.location.href= serv;
                 }
                 else{
                     window.alert("Coordonnées incorrectes");
