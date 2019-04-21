@@ -1,5 +1,5 @@
 var demoApp = angular.module('TodoApp',['ngCookies']); //[cookies]
-var serv = "https://http://todolist-bellin.herokuapp.com/";
+var serv = "https://todolist-bellin.herokuapp.com";
 
 demoApp.controller('MainController', function ($scope, $http, $cookies){ //,$cookies
     $scope.updateData = {};
